@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/assignment/type/review/db" VERSION="2012120304" COMMENT="XMLDB file for Moodle UI Activity Grader Submission type "
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="assignsubmission_review" COMMENT="Instances of submissions of this assignment type">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="assignment"/>
+        <FIELD NAME="assignment" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="submission"/>
+        <FIELD NAME="submission" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="assignment" NEXT="post_count"/>
+        <FIELD NAME="post_count" TYPE="int" LENGTH="20" NOTNULL="false" DEFAULT="0" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="submission" NEXT="post_grade"/>
+        <FIELD NAME="post_grade" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="post_count" NEXT="reply_count"/>
+        <FIELD NAME="reply_count" TYPE="int" LENGTH="20" DEFAULT="0" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="post_grade" NEXT="reply_grade"/>
+        <FIELD NAME="reply_grade" TYPE="number" LENGTH="10" DECIMALS="5" SEQUENCE="false" NOTNULL="false" PREVIOUS="reply_count"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="The unique id for this activity grader submission." NEXT="assignment"/>
+        <KEY NAME="assignment" TYPE="foreign" FIELDS="assignment" REFTABLE="assign" REFFIELDS="id" COMMENT="The assignment instance to which this activity grader submission relates." PREVIOUS="primary" NEXT="submission"/>
+        <KEY NAME="submission" TYPE="foreign" FIELDS="submission" REFTABLE="assign_submission" REFFIELDS="id" COMMENT="The submission to which this activity grader submission relates." PREVIOUS="assignment"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
