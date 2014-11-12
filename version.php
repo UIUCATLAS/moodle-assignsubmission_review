@@ -25,5 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2014092200;
+$plugin->release   = 2.1;
 $plugin->requires  =  2012120304;
 $plugin->component = 'assignsubmission_review';
+$plugin->maturity = MATURITY_STABLE; // This is considered as ready for production sites.
